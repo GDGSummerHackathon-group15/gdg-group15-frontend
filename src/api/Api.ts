@@ -149,7 +149,7 @@ class AjaxController {
   constructor() {
     this.instance = axios.create({
       baseURL: process.env.REACT_APP_BASEURI,
-      withCredentials: true,
+      withCredentials: false,
     });
 
     const keys = Object.keys(this.allowItems) as AllowKeys[];

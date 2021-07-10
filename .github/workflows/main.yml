@@ -81,7 +81,8 @@ jobs:
         if: steps.cache_built_packages.outputs.cache-hit == ''
         env:
           GENERATE_SOURCEMAP: false
-          REACT_APP_BASEURI: /
+          REACT_APP_BASEURI: http://hellowings.kro.kr
+          REACT_APP_GITHUB_CLIENT_ID: ae38ca7e0c28e8141df4
         run: yarn build
 
       - run: tar -zcvf build.tar.gz build
