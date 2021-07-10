@@ -4,9 +4,6 @@ import React, {Component} from 'react';
 import CSS from 'csstype';
 
 
-function SelectItem(eventKey: any) {
-
-}
 
 type SubProps = {
     menuItems: string[],
@@ -82,18 +79,23 @@ class SubDropDown extends React.Component<SubProps, SubState>  {
         
     }
 
+    
+    SelectItem(eventKey: any) {
+        
+    }
+
     render() {
         const dropDowns = []
 
         for(const value of this.props.menuItems) {
             dropDowns.push( <div style={SubMenu}>
-                         <Dropdown.Item eventKey={value} style={SubMenuText}>{value}</Dropdown.Item>
+                         <Dropdown.Item eventKey={value} style={SubMenuText} id={value}>{value}</Dropdown.Item>
                           </div>)
         }
         return (
          
 
-                <DropdownButton id="dropdown-basic-button" title={this.props.title} onSelect = {SelectItem} style={subButton}>
+                <DropdownButton id="dropdown-basic-button" title={this.props.title} onSelect = {this.SelectItem} style={subButton}>
                     <div> 
                         {dropDowns}
                     </div>
