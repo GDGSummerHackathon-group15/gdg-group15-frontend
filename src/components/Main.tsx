@@ -87,6 +87,15 @@ opacity: 0.83;
 
 box-shadow: 1px 8px 20px -3px rgba(32, 50, 65, 0.5), inset 3px 1px 20px 1px rgba(0, 0, 0, 0.25);
 border-radius: 10px;
+font-family: Noto Sans;
+font-style: normal;
+font-weight: 600;
+font-size: 30px;
+line-height: 41px;
+/* identical to box height */
+
+
+color: #203241;
 `;
 
 const BackEndButton = styled.button`
@@ -102,6 +111,15 @@ background: #28628B;
 
 box-shadow: 2px 4px 9px 4px rgba(0, 0, 0, 0.25), inset 13px 14px 22px -3px rgba(32, 50, 65, 0.5);
 border-radius: 10px;
+font-family: Noto Sans;
+font-style: normal;
+font-weight: 600;
+font-size: 30px;
+line-height: 41px;
+/* identical to box height */
+
+
+color: #FFFFFF;
 `;
 
 
@@ -118,9 +136,10 @@ function Main() {
                     프론트엔드 <br></br>
                     frontEnd
                     </FrontEndButton>
+                    
+                    <BackEndButton>
                     벡엔드 <br></br>
                     BackEnd
-                    <BackEndButton>
                     </BackEndButton>
                 </InBackground>
             </BackGround>
