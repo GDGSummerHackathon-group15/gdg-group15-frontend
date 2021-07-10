@@ -63,8 +63,9 @@ function SecondPage() {
     //                    {"프론트엔드": ["html", "css"]}]
 
     let menuItems: Ihash = {};
-    menuItems["벡엔드"] =  ["프레임워크", "데이터베이스"]
-    menuItems["프론트엔드"] = ["html", "css"]
+    
+    menuItems["벡엔드"] =  ["프레임워크", "데이터베이스", "설계/ 아키텍쳐", "NoSql", "메세지 브로커", "API 설계", "기타등등등", "등등등기타"]
+    menuItems["프론트엔드"] = ["html", "css", "js", "네트워크", "보안", "웹 어셈블리", "등등등"]
 
     const SubDropDowns = []
 
@@ -76,7 +77,7 @@ function SecondPage() {
     return (
     <Wrapper>
         <div>
-            <BackEnd> 벡엔드 </BackEnd>
+            
              {SubDropDowns}
         </div>
     </Wrapper>
