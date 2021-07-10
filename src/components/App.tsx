@@ -1,13 +1,13 @@
 
-import Main from './Main';
+import SecondPage from './SecondPage';
 
 function App() {
   return (
-    <div>
-      
-      
-      <Main></Main>
-    </div>
+    
+      <div>
+     <SecondPage/>
+     </div>
+    
   );
 }
 
