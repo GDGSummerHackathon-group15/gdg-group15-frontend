@@ -12,10 +12,14 @@ export const Main = styled.main`
 
 export const CategoryBox = styled.div`
   width: 20rem;
-  height: 75%;
-  background-color: rgba(255, 255, 255, 0.6);
+  height: fit-content;
+  max-height: 45rem;
+  padding: 4rem;
+  background-color: rgba(235, 235, 235, 0.4);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(4px);
-  border-radius: 0.25rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,13 +43,15 @@ export const CategoryBox = styled.div`
 
 export const CategoryTitle = styled.h2`
   color: var(--primary-dark);
+  margin-block-start: 1.25rem;
+  margin-block-end: 1.25rem;
   font-size: 2.5rem;
   font-family: Noto Sans KR;
   letter-spacing: 0.5px;
 `;
 
 export const CategoryGrid = styled.ul`
-  --grid-item-size: 20rem;
+  --grid-item-size: 14rem;
 
   list-style: none;
   overflow-y: auto;
@@ -57,6 +63,10 @@ export const CategoryGrid = styled.ul`
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   gap: 1.5rem;
+
+  @media (min-width: 480px) {
+    --grid-item-size: 20rem;
+  }
 
   @media (min-width: 960px) {
     grid-template-columns: repeat(2, var(--grid-item-size));
