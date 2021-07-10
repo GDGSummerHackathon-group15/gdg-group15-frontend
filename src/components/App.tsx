@@ -1,12 +1,21 @@
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
+
+import MainPage from './MainPage';
 
 const queryClient = new QueryClient();
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <div>GDG Hackathon group15</div>
+      <BrowserRouter>
+        <Switch>
+          <Route path={'/'} exact>
+            <MainPage />
+          </Route>
+        </Switch>
+      </BrowserRouter>
       <ReactQueryDevtools />
     </QueryClientProvider>
   );
