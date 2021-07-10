@@ -4,38 +4,142 @@ import type { AxiosInstance } from 'axios';
 export type HttpMethod = 'get' | 'put' | 'post' | 'delete';
 
 interface AllowItem {
-  categories: ['get'];
-  category: ['get'];
-  roadmaps: ['get'];
+  parts: ['get'];
+  part: ['get'];
+  subCategories: ['get'];
   book: ['get'];
   user: ['get'];
   review: ['put', 'post'];
+  githubLogin: ['post'];
   wish: ['post', 'delete'];
 }
 
-type AllowKeys = 'categories' | 'category' | 'roadmaps' | 'book' | 'user' | 'review' | 'wish';
+type AllowKeys =
+  | 'parts'
+  | 'part'
+  | 'subCategories'
+  | 'book'
+  | 'user'
+  | 'review'
+  | 'githubLogin'
+  | 'wish';
 
 export type RequestKey =
-  | 'get.categories'
-  | 'get.category'
-  | 'get.roadmaps'
+  | 'get.parts'
+  | 'get.part'
+  | 'get.subCategories'
   | 'get.book'
   | 'get.user'
   | 'put.review'
   | 'post.review'
   | 'post.wish'
-  | 'post.delete';
+  | 'post.githubLogin'
+  | 'delete.wish';
+
+type PartsReturn = {
+  partId: number;
+  partName: string;
+}[];
+
+type PartReturn = {
+  mainCategoryId: number;
+  title: string;
+  subCategoryResponses: {
+    subCategoryId: number;
+    title: string;
+  }[];
+}[];
+
+type SubCategoriesReturn = {
+  bookId: number;
+  title: string;
+  description: string;
+  imageUrl: string;
+  averageRating: number;
+  reviewerCount: number;
+  reviews: {
+    reviewId: number;
+    averageRating: number;
+    content: string;
+    userResponse: {
+      userId: number;
+      avatorUrl: string;
+      name: string;
+    };
+  }[];
+}[];
+
+type BookReturn = {
+  bookId: number;
+  title: string;
+  description: string;
+  imageUrl: string;
+  averageRating: number;
+  reviewerCount: number;
+  reviews: {
+    reviewId: number;
+    averageRating: number;
+    content: string;
+    userResponse: {
+      userId: number;
+      avatorUrl: string;
+      name: string;
+    };
+  }[];
+};
+
+type UserReturn = {
+  userId: number;
+  avatarUrl: string;
+  name: string;
+  wishes: {
+    bookId: number;
+    title: string;
+    description: string;
+    imageUrl: string;
+  }[];
+};
+
+type ReivewReturn = {
+  reviewId: number;
+  userResponse: {
+    userId: number;
+    avatarUrl: string;
+    name: string;
+  };
+  averageRating: number;
+  content: string;
+};
+
+type GithubLoginReturn = {
+  avatarUrl: string;
+  name: string;
+  jwt: string;
+};
+
+type WishReturn = {
+  userId: number;
+  avatarUrl: string;
+  userName: string;
+  wishes: {
+    bookId: number;
+    title: string;
+    description: string;
+    imageUrl: string;
+  }[];
+};
 
 class AjaxController {
   private instance: AxiosInstance;
 
   private allowItems: AllowItem = {
-    categories: ['get'],
-    category: ['get'],
-    roadmaps: ['get'],
+    parts: ['get'],
+    part: ['get'],
+    subCategories: ['get'],
     book: ['get'],
     user: ['get'],
     review: ['put', 'post'],
+    githubLogin: ['post'],
     wish: ['post', 'delete'],
   };
 
@@ -61,104 +165,80 @@ class AjaxController {
     }, []);
   }
 
-  // Todo
-  private categories(method: 'get'): void {
-    return;
+  async parts<Return = PartsReturn>(method: 'get'): Promise<Return> {
+    const resp = await this.instance[method]<Return>('/api/parts');
+    return resp.data;
   }
 
-  // Todo
-  private category(method: 'get'): void {
-    return;
+  async part<Return = PartReturn>(method: 'get', payload: number): Promise<Return> {
+    const resp = await this.instance[method]<Return>(`/api/parts/${payload}`);
+    return resp.data;
   }
 
-  // Todo
-  private roadmaps(method: 'get'): void {
-    return;
+  async subCategories<Return = SubCategoriesReturn>(
+    method: 'get',
+    payload: number
+  ): Promise<Return> {
+    const resp = await this.instance[method]<Return>(`/api/subCategories/${payload}`);
+    return resp.data;
   }
 
-  // Todo
-  private book(method: 'get'): void {
-    return;
+  async book<Return = BookReturn>(method: 'get', payload: number): Promise<Return> {
+    const resp = await this.instance[method]<Return>(`/api/books/${payload}`);
+    return resp.data;
   }
 
-  // Todo
-  private user(method: 'get'): void {
-    return;
+  async user<Return = UserReturn>(method: 'get', payload: number): Promise<Return> {
+    const resp = await this.instance[method]<Return>(`/api/user/${payload}`);
+    return resp.data;
   }
 
-  // Todo
-  private review(method: 'put'): void;
-  private review(method: 'post'): void;
-  private review(method: any): void {
-    if (method === 'put') {
-      return;
+  async review<Return = ReivewReturn>(
+    method: 'post',
+    payload: {
+      bookId: number;
+      averageRating: number;
+      content: string;
     }
+  ): Promise<Return>;
+  async review<Return = ReivewReturn>(
+    method: 'put',
+    payload: {
+      reviewId: number;
+      averageRating: number;
+      content: string;
+    }
+  ): Promise<Return>;
+  async review<Return = ReivewReturn>(method: 'put' | 'post', payload: any): Promise<Return> {
     if (method === 'post') {
-      return;
+      const { bookId, ...rest } = payload;
+      const resp = await this.instance[method]<Return>(`/api/books/${bookId}/reviews`, rest);
+      return resp.data;
     }
-    return;
+
+    const { reviewId, ...rest } = payload;
+    const resp = await this.instance[method]<Return>(`/api/reviews/${reviewId}`, rest);
+    return resp.data;
   }
 
-  // Todo
-  private wish(method: 'post'): void;
-  private wish(method: 'delete'): void;
-  private wish(method: any): void {
+  async githubLogin<Return = GithubLoginReturn>(method: 'post', payload: string): Promise<Return> {
+    const resp = await this.instance[method]<Return>(`/api/login?code=${payload}`);
+    return resp.data;
+  }
+
+  async wish<Return = WishReturn>(method: 'post', payload: number): Promise<Return>;
+  async wish<Return = void>(method: 'delete', payload: number): Promise<Return>;
+  async wish<Return = WishReturn | void>(
+    method: 'post' | 'delete',
+    payload: number
+  ): Promise<Return> {
     if (method === 'post') {
-      return;
-    }
-    if (method === 'delete') {
-      return;
-    }
-    return;
-  }
-
-  private methodGuard(method: string): method is HttpMethod {
-    if ((this.allowMethods as string[]).includes(method)) {
-      return true;
-    }
-    return false;
-  }
-
-  private routeKeyGuard(key: string): key is AllowKeys {
-    if ((this.allowKeys as string[]).includes(key)) {
-      return true;
-    }
-    return false;
-  }
-
-  private requestKeySplitHelper(key: RequestKey): [HttpMethod, AllowKeys] {
-    const splits = key.split('.');
-    if (splits.length !== 2) {
-      throw new Error('request not allowed method!');
+      const resp = await this.instance[method]<Return>(`/api/books/${payload}/wishes`);
+      return resp.data;
     }
 
-    const [method, routeKey] = splits;
-
-    if (!this.methodGuard(method)) {
-      throw new Error('request not allowed method!');
-    }
-    if (!this.routeKeyGuard(routeKey)) {
-      throw new Error('request not allowed method!');
-    }
-
-    return [method, routeKey];
-  }
-
-  private allowMethodValidator(method: HttpMethod, routeKey: AllowKeys) {
-    const methods: HttpMethod[] = this.allowItems[routeKey];
-    if (methods.includes(method)) return true;
-    return false;
-  }
-
-  request(key: RequestKey) {
-    const [method, routeKey] = this.requestKeySplitHelper(key);
-
-    if (!this.allowMethodValidator(method, routeKey)) {
-      throw new Error('request not allowed method!');
-    }
-
-    const ajaxFn = this[routeKey];
-    return ajaxFn;
+    const resp = await this.instance[method]<Return>(`/api/wishes/${payload}`);
+    return resp.data;
   }
 }
 
