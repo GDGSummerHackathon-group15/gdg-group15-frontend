@@ -1,10 +1,12 @@
-import GithubLogin from './GithubLogin';
+
+import Main from './Main';
 
 function App() {
   return (
     <div>
-      GDG Hackathon group15
-      <GithubLogin />
+      
+      
+      <Main></Main>
     </div>
   );
 }
