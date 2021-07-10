@@ -6,6 +6,7 @@ function App() {
     
       <div>
      <SecondPage/>
+
      </div>
     
   );

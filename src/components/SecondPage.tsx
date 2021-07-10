@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import SubDropDown from './SubDropDown';
 
 
 const Wrapper = styled.section`
@@ -24,16 +25,6 @@ top: 131px;
 font-family: Noto Sans;
 font-style: normal;
 font-weight: 600;
-
-font-size: ${props => (props.selected ? "36px": "25px")};
-line-height: ${props.selected ? "49px": "34px"};
-opacity: ${props.selected ? 1: 0.33}
-
-
-
-/* identical to box height */
-
-
 color: #203241;
 
 
@@ -58,8 +49,6 @@ color: #203241;
 
 opacity: 0.33;
 
-
-
 `;
 
 
@@ -68,6 +57,7 @@ function SecondPage() {
     <Wrapper>
         <div>
             <BackEnd> 벡엔드 </BackEnd>
+            <SubDropDown menuItems={["프레임워크", "데이터베이스"]}></SubDropDown>
             <FrontEnd>프론트엔드</FrontEnd>
         </div>
     </Wrapper>
