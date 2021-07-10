@@ -52,13 +52,32 @@ opacity: 0.33;
 `;
 
 
+export interface Ihash {
+    [title: string] : string[];
+}
+
 function SecondPage() {
+    const area = ["벡엔드", "프론트엔드"]
+    
+    // const menuItems = [{"벡엔드": ["프레임워크", "데이터베이스"]}, 
+    //                    {"프론트엔드": ["html", "css"]}]
+
+    let menuItems: Ihash = {};
+    menuItems["벡엔드"] =  ["프레임워크", "데이터베이스"]
+    menuItems["프론트엔드"] = ["html", "css"]
+
+    const SubDropDowns = []
+
+    for(const name of area) {
+        SubDropDowns.push(<SubDropDown menuItems={menuItems[name]} title={name}></SubDropDown>)
+    }
+        
+
     return (
     <Wrapper>
         <div>
             <BackEnd> 벡엔드 </BackEnd>
-            <SubDropDown menuItems={["프레임워크", "데이터베이스"]}></SubDropDown>
-            <FrontEnd>프론트엔드</FrontEnd>
+             {SubDropDowns}
         </div>
     </Wrapper>
     );

@@ -6,7 +6,8 @@ function SelectItem(eventKey: any) {
 }
 
 type SubProps = {
-    menuItems: string[]
+    menuItems: string[],
+    title: string
 };
 
 type SubState = {
@@ -22,7 +23,7 @@ class SubDropDown extends React.Component<SubProps, SubState>  {
         }
         return (
             <div>
-                <DropdownButton id="dropdown-basic-button" title="벡엔드" onSelect = {SelectItem}>
+                <DropdownButton id="dropdown-basic-button" title={this.props.title} onSelect = {SelectItem}>
                    {dropDowns}
                 </DropdownButton>
             </div>
