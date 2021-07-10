@@ -64,7 +64,7 @@ class AjaxController {
 		this.allowMethods = keys.reduce<HttpMethod[]>((acc, key) => {
 			const item = this.allowItems[key];
 
-			item.forEach((el) => {
+			item.forEach((el: HttpMethod) => {
 				if (!acc.includes(el)) acc.push(el);
 			});
 
