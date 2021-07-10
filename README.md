@@ -1,5 +1,11 @@
 # GDG Summer Hackathon - group 15
 
+## Git config set
+```
+$ git config commit.template .gitmessage
+$ git config core.hooksPath .git-hooks
+```
+
 ## How to start
 ```
 $ yarn or npm install
