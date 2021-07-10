@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import React, {Component} from 'react';
 import CSS from 'csstype';
 
+
 function SelectItem(eventKey: any) {
 
 }
@@ -47,7 +48,8 @@ const subButton: CSS.Properties = {
     fontSize: "25px",
     lineHeight: "34px",
     color: "#203241",
-    opacity: 0.33
+    opacity: 0.33,
+    margin: "10px"
     }
 
 const SubMenu: CSS.Properties = {
@@ -65,6 +67,7 @@ const SubMenuText: CSS.Properties = {
 background: "#FED1D1",
 mixBlendMode: "multiply"
 }
+
 
 class SubDropDown extends React.Component<SubProps, SubState>  {
 
@@ -87,7 +90,7 @@ class SubDropDown extends React.Component<SubProps, SubState>  {
                           </div>)
         }
         return (
-            <div>
+         
 
                 <DropdownButton id="dropdown-basic-button" title={this.props.title} onSelect = {SelectItem} style={subButton}>
                     <div> 
@@ -95,7 +98,7 @@ class SubDropDown extends React.Component<SubProps, SubState>  {
                     </div>
               
                 </DropdownButton>
-            </div>
+           
         );
     }
     

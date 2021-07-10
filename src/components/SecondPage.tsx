@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import SubDropDown from './SubDropDown';
-
+import CSS from 'csstype';
 
 const Wrapper = styled.section`
   
@@ -52,6 +52,10 @@ opacity: 0.33;
 `;
 
 
+const flexContainer: CSS.Properties = {
+    display: "flex"
+}
+
 export interface Ihash {
     [title: string] : string[];
 }
@@ -76,7 +80,7 @@ function SecondPage() {
 
     return (
     <Wrapper>
-        <div>
+        <div style={flexContainer}>
             
              {SubDropDowns}
         </div>
