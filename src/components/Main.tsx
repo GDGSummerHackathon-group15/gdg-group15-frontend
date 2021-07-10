@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { notifyManager } from 'react-query';
 import GithubLogin from './GithubLogin';
 
 const BackGround = styled.div`
@@ -131,6 +132,7 @@ function Main() {
                     <Title>서비스 이름</Title>
                 </div>
                 <InBackground>
+                    <div>
                     <SubTitle>당신이 공부하고 싶고 관심있는 분야를 선택하세요</SubTitle>
                     <FrontEndButton>
                     프론트엔드 <br></br>
@@ -141,6 +143,8 @@ function Main() {
                     벡엔드 <br></br>
                     BackEnd
                     </BackEndButton>
+                    </div>
+                   
                 </InBackground>
             </BackGround>
         );
