@@ -6,6 +6,11 @@ $ git config commit.template .gitmessage
 $ git config core.hooksPath .git-hooks
 ```
 
+만약 pre-commit hook이 실행이 안될경우 실행 권한 확인
+```
+$ chmod 755 .git-hooks/pre-commit
+```
+
 ## How to start
 ```
 $ yarn or npm install
