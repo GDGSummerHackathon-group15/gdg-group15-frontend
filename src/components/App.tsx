@@ -1,14 +1,23 @@
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
-import SecondPage from './SecondPage';
+import MainPage from './MainPage';
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    
-      <div>
-     <SecondPage/>
-
-     </div>
-    
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Switch>
+          <Route path={'/'} exact>
+            <MainPage />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+      <ReactQueryDevtools />
+    </QueryClientProvider>
   );
 }
 

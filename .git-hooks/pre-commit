@@ -3,7 +3,7 @@ RED="\033[1;31m"
 GREEN="\033[1;32m"
 NC="\033[0m"
 linter_exit_code=1
-staged_files=$(git diff --cached --diff-filter=d --name-only | grep .tsx$)
+staged_files=$(git diff --cached --diff-filter=d --name-only | grep '.ts\|.tsx'$)
 ./node_modules/.bin/prettier $staged_files -w
 ./node_modules/.bin/eslint $staged_files --quiet
 linter_exit_code=$?
