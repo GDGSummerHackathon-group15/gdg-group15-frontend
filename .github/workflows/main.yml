@@ -81,6 +81,7 @@ jobs:
         if: steps.cache_built_packages.outputs.cache-hit == ''
         env:
           GENERATE_SOURCEMAP: false
+          REACT_APP_BASEURI: /
         run: yarn build
 
       - run: tar -zcvf build.tar.gz build
