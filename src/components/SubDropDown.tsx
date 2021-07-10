@@ -56,7 +56,8 @@ const SubMenu: CSS.Properties = {
     
 /* Beige */
 background: "#FFFAF7",
-borderRadius: "5px"
+borderRadius: "5px",
+margin: "10px"
 }
 
 type SubState = {
