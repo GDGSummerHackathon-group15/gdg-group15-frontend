@@ -2,8 +2,9 @@ import { LoginAnchor } from './GithubLogin.styles';
 
 const GITHUB_LOGIN_URI = 'https://github.com/login/oauth/authorize';
 const CLIENT_ID = `client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}`;
+const SCOPE = 'scope=user';
 const REDIRECT_URI = `redirect_uri=${window.origin}/oauth/github`;
-const LOGIN_URI = `${GITHUB_LOGIN_URI}?${CLIENT_ID}&${REDIRECT_URI}`;
+const LOGIN_URI = `${GITHUB_LOGIN_URI}?${CLIENT_ID}&${SCOPE}&${REDIRECT_URI}`;
 
 const GithubLogo = () => (
   <svg width={24} height={24} viewBox={'0 0 24 24'}>

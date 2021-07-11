@@ -1,6 +1,8 @@
+import * as React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useUserInfo } from '../context';
 import GithubLogin from './GithubLogin';
-import { Base, Navigation } from './Header.styles';
+import { Base, Navigation, UserProfile, Avatar, AvatorImage } from './Header.styles';
 
 const LogoType1 = () => (
   <svg width={200} height={40} viewBox={'16 12 400 95'} fill={'none'}>
@@ -38,14 +40,43 @@ const LogoType2 = () => (
   </svg>
 );
 
+const AvatorIcon = () => (
+  <svg width={24} height={24} viewBox={'0 0 24 24'} fill={'#ffffff'}>
+    <path
+      d={
+        'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'
+      }
+    />
+  </svg>
+);
+
 function Header() {
   const location = useLocation();
+  const userInfo = useUserInfo();
 
   return (
     <Base>
       <Link to={'/'}>{location.pathname === '/' ? <LogoType1 /> : <LogoType2 />}</Link>
       <Navigation>
-        <GithubLogin />
+        {userInfo === undefined ? (
+          <GithubLogin />
+        ) : (
+          <UserProfile>
+            {userInfo.avatarUrl ? (
+              <AvatorImage
+                src={userInfo.avatarUrl}
+                width={32}
+                height={32}
+                alt={'유저 아바타 이미지'}
+              />
+            ) : (
+              <Avatar>
+                <AvatorIcon />
+              </Avatar>
+            )}
+            <span>{userInfo.userName}</span>
+          </UserProfile>
+        )}
       </Navigation>
     </Base>
   );

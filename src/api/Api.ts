@@ -14,16 +14,6 @@ interface AllowItem {
   wish: ['post', 'delete'];
 }
 
-type AllowKeys =
-  | 'parts'
-  | 'part'
-  | 'subCategories'
-  | 'book'
-  | 'user'
-  | 'review'
-  | 'githubLogin'
-  | 'wish';
-
 export type RequestKey =
   | 'get.parts'
   | 'get.part'
@@ -88,10 +78,10 @@ type BookReturn = {
   }[];
 };
 
-type UserReturn = {
+export type UserReturn = {
   userId: number;
   avatarUrl: string;
-  name: string;
+  userName: string;
   wishes: {
     bookId: number;
     title: string;
@@ -100,7 +90,7 @@ type UserReturn = {
   }[];
 };
 
-type ReivewReturn = {
+type ReviewReturn = {
   reviewId: number;
   userResponse: {
     userId: number;
@@ -112,6 +102,7 @@ type ReivewReturn = {
 };
 
 type GithubLoginReturn = {
+  userId: number;
   avatarUrl: string;
   name: string;
   jwt: string;
@@ -143,101 +134,81 @@ class AjaxController {
     wish: ['post', 'delete'],
   };
 
-  private allowKeys: AllowKeys[];
-  private allowMethods: HttpMethod[];
-
   constructor() {
     this.instance = axios.create({
       baseURL: process.env.REACT_APP_BASEURI,
       withCredentials: false,
     });
-
-    const keys = Object.keys(this.allowItems) as AllowKeys[];
-    this.allowKeys = keys;
-    this.allowMethods = keys.reduce<HttpMethod[]>((acc, key) => {
-      const item = this.allowItems[key];
-
-      item.forEach((el: HttpMethod) => {
-        if (!acc.includes(el)) acc.push(el);
-      });
-
-      return acc;
-    }, []);
   }
 
-  async parts<Return = PartsReturn>(method: 'get'): Promise<Return> {
-    const resp = await this.instance[method]<Return>('/api/parts');
+  async parts(method: 'get'): Promise<PartsReturn> {
+    const resp = await this.instance[method]<PartsReturn>('/api/parts');
     return resp.data;
   }
 
-  async part<Return = PartReturn>(method: 'get', payload: number): Promise<Return> {
-    const resp = await this.instance[method]<Return>(`/api/parts/${payload}`);
+  async part(method: 'get', payload: number): Promise<PartReturn> {
+    const resp = await this.instance[method]<PartReturn>(`/api/parts/${payload}`);
     return resp.data;
   }
 
-  async subCategories<Return = SubCategoriesReturn>(
-    method: 'get',
-    payload: number
-  ): Promise<Return> {
-    const resp = await this.instance[method]<Return>(`/api/subCategories/${payload}`);
+  async subCategories(method: 'get', payload: number): Promise<SubCategoriesReturn> {
+    const resp = await this.instance[method]<SubCategoriesReturn>(`/api/subCategories/${payload}`);
     return resp.data;
   }
 
-  async book<Return = BookReturn>(method: 'get', payload: number): Promise<Return> {
-    const resp = await this.instance[method]<Return>(`/api/books/${payload}`);
+  async book(method: 'get', payload: number): Promise<BookReturn> {
+    const resp = await this.instance[method]<BookReturn>(`/api/books/${payload}`);
     return resp.data;
   }
 
-  async user<Return = UserReturn>(method: 'get', payload: number): Promise<Return> {
-    const resp = await this.instance[method]<Return>(`/api/user/${payload}`);
+  async user(method: 'get', payload: number): Promise<UserReturn> {
+    const resp = await this.instance[method]<UserReturn>(`/api/user/${payload}`);
     return resp.data;
   }
 
-  async review<Return = ReivewReturn>(
+  async review(
     method: 'post',
     payload: {
       bookId: number;
       averageRating: number;
       content: string;
     }
-  ): Promise<Return>;
-  async review<Return = ReivewReturn>(
+  ): Promise<ReviewReturn>;
+  async review(
     method: 'put',
     payload: {
       reviewId: number;
       averageRating: number;
       content: string;
     }
-  ): Promise<Return>;
-  async review<Return = ReivewReturn>(method: 'put' | 'post', payload: any): Promise<Return> {
+  ): Promise<ReviewReturn>;
+  async review(method: 'put' | 'post', payload: any): Promise<ReviewReturn> {
     if (method === 'post') {
       const { bookId, ...rest } = payload;
-      const resp = await this.instance[method]<Return>(`/api/books/${bookId}/reviews`, rest);
+      const resp = await this.instance[method]<ReviewReturn>(`/api/books/${bookId}/reviews`, rest);
       return resp.data;
     }
 
     const { reviewId, ...rest } = payload;
-    const resp = await this.instance[method]<Return>(`/api/reviews/${reviewId}`, rest);
+    const resp = await this.instance[method]<ReviewReturn>(`/api/reviews/${reviewId}`, rest);
     return resp.data;
   }
 
-  async githubLogin<Return = GithubLoginReturn>(method: 'post', payload: string): Promise<Return> {
-    const resp = await this.instance[method]<Return>(`/api/login?code=${payload}`);
+  async githubLogin(method: 'post', payload: string): Promise<GithubLoginReturn> {
+    const resp = await this.instance[method]<GithubLoginReturn>(`/api/login?code=${payload}`);
+    this.instance.defaults.headers.Authorization = `Bearer ${resp.data.jwt}`;
     return resp.data;
   }
 
-  async wish<Return = WishReturn>(method: 'post', payload: number): Promise<Return>;
-  async wish<Return = void>(method: 'delete', payload: number): Promise<Return>;
-  async wish<Return = WishReturn | void>(
-    method: 'post' | 'delete',
-    payload: number
-  ): Promise<Return> {
+  async wish(method: 'post', payload: number): Promise<WishReturn>;
+  async wish(method: 'delete', payload: number): Promise<void>;
+  async wish(method: 'post' | 'delete', payload: number): Promise<WishReturn | void> {
     if (method === 'post') {
-      const resp = await this.instance[method]<Return>(`/api/books/${payload}/wishes`);
+      const resp = await this.instance[method]<WishReturn>(`/api/books/${payload}/wishes`);
       return resp.data;
     }
 
-    const resp = await this.instance[method]<Return>(`/api/wishes/${payload}`);
+    const resp = await this.instance[method]<void>(`/api/wishes/${payload}`);
     return resp.data;
   }
 }
