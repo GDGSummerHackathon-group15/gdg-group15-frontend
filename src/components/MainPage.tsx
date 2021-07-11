@@ -1,4 +1,5 @@
 import { useQuery } from 'react-query';
+import { useHistory } from 'react-router-dom';
 import api from '../api';
 import {
   Main,
@@ -14,13 +15,20 @@ function MainPage() {
     return data;
   });
 
+  const history = useHistory();
+
   return (
     <Main>
       <CategoryBox>
         <CategoryTitle>관심있는 분야를 선택해주세요!</CategoryTitle>
         <CategoryGrid>
           {data?.map((el) => (
-            <CategoryGridItem key={el.partId}>
+            <CategoryGridItem
+              onClick={() => {
+                history.push(`/parts/${el.partId}`);
+              }}
+              key={el.partId}
+            >
               <span>{el.partName}</span>
             </CategoryGridItem>
           ))}
