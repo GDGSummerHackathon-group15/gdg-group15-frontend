@@ -7,7 +7,7 @@ export const ContentBox = styled.div`
 `;
 
 export const CategoryList = styled.ul`
-  width: 14.25rem;
+  width: 16rem;
   height: 100%;
   list-style: none;
   margin-block: 0;
@@ -46,7 +46,7 @@ export const CategoryListItem = styled.li`
 `;
 
 export const SubCategoryList = styled.ul`
-  width: 10rem;
+  width: 11rem;
   height: 100%;
   list-style: none;
   margin-block: 0;
