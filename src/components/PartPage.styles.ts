@@ -29,7 +29,19 @@ export const CategoryListItem = styled.li`
   align-items: center;
 
   &[data-selected='true'] {
+    position: relative;
     border-bottom: 2px solid var(--primary-blue);
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+      top: 50%;
+      left: -1.25rem;
+      background-color: var(--primary-blue);
+    }
   }
 `;
 
@@ -53,7 +65,19 @@ export const SubCategoryListItem = styled.li`
   align-items: center;
 
   &[data-selected='true'] {
+    position: relative;
     border-bottom: 2px solid var(--primary-blue);
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+      top: 50%;
+      left: -1.25rem;
+      background-color: var(--primary-blue);
+    }
   }
 `;
 
