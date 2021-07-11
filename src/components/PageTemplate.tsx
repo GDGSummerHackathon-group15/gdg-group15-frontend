@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Main, Header, HeaderText, Container } from './PageTemplate.styles';
+import Header from './Header';
+import { Main, Container } from './PageTemplate.styles';
 
 export interface PageTemplateProps {
   children?: React.ReactNode;
@@ -8,9 +9,7 @@ export interface PageTemplateProps {
 function PageTemplate({ children }: PageTemplateProps) {
   return (
     <Main>
-      <Header>
-        <HeaderText>Hello Wings</HeaderText>
-      </Header>
+      <Header />
       <Container>{children}</Container>
     </Main>
   );

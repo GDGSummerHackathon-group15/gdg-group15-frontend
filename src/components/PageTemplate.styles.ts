@@ -6,21 +6,7 @@ export const Main = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: linear-gradient(180deg, var(--secondary-beige), var(--secondary-blue-grey));
-`;
-
-export const Header = styled.header`
-  height: 4.5rem;
-  width: 100%;
-  border-bottom: 1px solid var(--primary-blue);
-  display: flex;
-  align-items: center;
-`;
-
-export const HeaderText = styled.h1`
-  font-size: 2rem;
-  font-family: Noto Sans KR;
-  margin-left: 4rem;
+  background: linear-gradient(180deg, var(--secondary-blue-grey), var(--secondary-beige));
 `;
 
 export const Container = styled.div`
@@ -33,8 +19,6 @@ export const Container = styled.div`
 
 const styles = {
   Main,
-  Header,
-  HeaderText,
   Container,
 };
 

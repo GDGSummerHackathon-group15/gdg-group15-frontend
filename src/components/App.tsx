@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 
@@ -21,6 +21,9 @@ function App() {
           </Route>
           <Route path={'/books/:bookId'} exact>
             <BookPage />
+          </Route>
+          <Route path={'/oauth/github'} exact>
+            <Redirect to={'/'} />
           </Route>
         </Switch>
       </BrowserRouter>
