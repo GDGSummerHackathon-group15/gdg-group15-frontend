@@ -1,16 +1,8 @@
 import styled from '@emotion/styled';
 
-export const Main = styled.main`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(180deg, var(--secondary-beige), var(--secondary-blue-grey));
-`;
-
 export const CategoryBox = styled.div`
+  margin-top: 10rem;
+  align-self: center;
   width: 20rem;
   height: fit-content;
   max-height: 45rem;
@@ -108,7 +100,6 @@ export const CategoryGridItem = styled.li`
 `;
 
 const styles = {
-  Main,
   CategoryBox,
   CategoryTitle,
   CategoryGrid,

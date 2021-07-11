@@ -1,12 +1,9 @@
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import api from '../api';
+import PageTemplate from './PageTemplate';
 import PartList from './PartList';
 import {
-  Main,
-  Header,
-  HeaderText,
-  Container,
   ContentBox,
   BookDetailBox,
   BookDetailTitle,
@@ -65,55 +62,50 @@ function BookPage() {
 
   if (book === undefined) return null;
   return (
-    <Main>
-      <Header>
-        <HeaderText>HelloWings</HeaderText>
-      </Header>
-      <Container>
-        <PartList />
-        <ContentBox>
-          <div>
-            <img src={book.imageUrl} width={360} alt={`${book.title} 책 표지`} />
-          </div>
-          <BookDetailBox>
-            <BookDetailTitle>{book.title}</BookDetailTitle>
-            <BookDetailDescription>{book.description}</BookDetailDescription>
-            <RatingBox>
-              <RatingTitle>평균</RatingTitle>
-              <StarBox>
-                <StarIcon />
-                <StarIcon />
-                <StarIcon />
-                <StarIcon />
-                <StarIcon />
-              </StarBox>
-              <RatingNumber>{`${book.averageRating} / 5`}</RatingNumber>
-              <RatingCount>{`${book.reviewerCount}명이 평가`}</RatingCount>
-              <LikeButton>
-                <LikeIcon />
-                <span>위시리스트에 추가</span>
-              </LikeButton>
-            </RatingBox>
-            <ReviewBox>
-              <ReviewTitle>리뷰</ReviewTitle>
-              <ReviewList>
-                {book.reviews.length === 0 && (
-                  <ReviewEmptyListItem>리뷰가 없어요</ReviewEmptyListItem>
-                )}
-                {book.reviews.map((el) => (
-                  <ReviewListItem>
-                    {el.reviewId}
-                    {el.averageRating}
-                    {el.content}
-                  </ReviewListItem>
-                ))}
-              </ReviewList>
-              <ReviewField>리뷰를 추가하려면 로그인해주세요.</ReviewField>
-            </ReviewBox>
-          </BookDetailBox>
-        </ContentBox>
-      </Container>
-    </Main>
+    <PageTemplate>
+      <PartList />
+      <ContentBox>
+        <div>
+          <img src={book.imageUrl} width={360} alt={`${book.title} 책 표지`} />
+        </div>
+        <BookDetailBox>
+          <BookDetailTitle>{book.title}</BookDetailTitle>
+          <BookDetailDescription>{book.description}</BookDetailDescription>
+          <RatingBox>
+            <RatingTitle>평균</RatingTitle>
+            <StarBox>
+              <StarIcon />
+              <StarIcon />
+              <StarIcon />
+              <StarIcon />
+              <StarIcon />
+            </StarBox>
+            <RatingNumber>{`${book.averageRating} / 5`}</RatingNumber>
+            <RatingCount>{`${book.reviewerCount}명이 평가`}</RatingCount>
+            <LikeButton>
+              <LikeIcon />
+              <span>위시리스트에 추가</span>
+            </LikeButton>
+          </RatingBox>
+          <ReviewBox>
+            <ReviewTitle>리뷰</ReviewTitle>
+            <ReviewList>
+              {book.reviews.length === 0 && (
+                <ReviewEmptyListItem>리뷰가 없어요</ReviewEmptyListItem>
+              )}
+              {book.reviews.map((el) => (
+                <ReviewListItem>
+                  {el.reviewId}
+                  {el.averageRating}
+                  {el.content}
+                </ReviewListItem>
+              ))}
+            </ReviewList>
+            <ReviewField>리뷰를 추가하려면 로그인해주세요.</ReviewField>
+          </ReviewBox>
+        </BookDetailBox>
+      </ContentBox>
+    </PageTemplate>
   );
 }
 

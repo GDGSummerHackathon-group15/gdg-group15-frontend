@@ -1,13 +1,8 @@
 import { useQuery } from 'react-query';
 import { useHistory } from 'react-router-dom';
 import api from '../api';
-import {
-  Main,
-  CategoryBox,
-  CategoryTitle,
-  CategoryGrid,
-  CategoryGridItem,
-} from './MainPage.styles';
+import PageTemplate from './PageTemplate';
+import { CategoryBox, CategoryTitle, CategoryGrid, CategoryGridItem } from './MainPage.styles';
 
 function MainPage() {
   const { data } = useQuery('parts', async () => {
@@ -18,7 +13,7 @@ function MainPage() {
   const history = useHistory();
 
   return (
-    <Main>
+    <PageTemplate>
       <CategoryBox>
         <CategoryTitle>관심있는 분야를 선택해주세요!</CategoryTitle>
         <CategoryGrid>
@@ -34,7 +29,7 @@ function MainPage() {
           ))}
         </CategoryGrid>
       </CategoryBox>
-    </Main>
+    </PageTemplate>
   );
 }
 
