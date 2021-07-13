@@ -6,6 +6,11 @@ export const ContentBox = styled.div`
   display: flex;
 `;
 
+export const ListBox = styled.div`
+  display: flex;
+  position: relative;
+`;
+
 export const CategoryList = styled.ul`
   width: 16rem;
   height: 100%;
@@ -83,6 +88,7 @@ export const SubCategoryListItem = styled.li`
 
 const styles = {
   ContentBox,
+  ListBox,
   CategoryList,
   CategoryListItem,
   SubCategoryList,

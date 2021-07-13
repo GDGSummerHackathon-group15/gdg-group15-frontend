@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 export const SliderBox = styled.div`
   flex: 1;
   width: calc(100% - 24.25rem);
+  min-width: 45rem;
 `;
 
 export const SliderItemBox = styled.div`

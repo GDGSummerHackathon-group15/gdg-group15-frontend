@@ -1,8 +1,7 @@
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import api from '../api';
-import PageTemplate from './PageTemplate';
-import PartList from './PartList';
+import PartList from './_PartList';
 import {
   ContentBox,
   BookDetailBox,
@@ -62,7 +61,7 @@ function BookPage() {
 
   if (book === undefined) return null;
   return (
-    <PageTemplate>
+    <>
       <PartList />
       <ContentBox>
         <div>
@@ -105,7 +104,7 @@ function BookPage() {
           </ReviewBox>
         </BookDetailBox>
       </ContentBox>
-    </PageTemplate>
+    </>
   );
 }
 

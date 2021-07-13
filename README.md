@@ -22,3 +22,8 @@ $ yarn start or npm run start
 $ yarn test // test run by jest
 $ yarn build // build frontend project
 ```
+
+## Breakpoints
+- Desktop: 1024px ~
+- Tablet: 480px ~ 1023px
+- Mobile: ~ 479px

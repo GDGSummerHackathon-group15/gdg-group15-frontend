@@ -3,21 +3,24 @@
 	--primary-blue: #327aae;
 	--secondary-blue-grey: #d1eaf8;
 	--secondary-beige: #fed1d1;
-	--beige: #fffaf6;
+	--pantone-297: #82c6e2;
+
+	--illuminating: #f4df4d;
+	--lead-crystal: #c2bfba;
+	--lavender: #afa4ce;
+	--prism-pink: #f0a1bf;
+	--placid-blue: #8cacd3;
+	--ultimate-grey: #939597;
 }
 
 html {
 	width: 100%;
 	height: 100%;
 	font-size: 16px;
+	font-family: 'iA Writer Quattro';
 }
 
 body {
-	width: 100%;
-	height: 100%;
-}
-
-#root {
 	width: 100%;
 	height: 100%;
 }
