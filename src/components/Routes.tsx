@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Switch, Route, useLocation } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import styled from '@emotion/styled';
@@ -7,7 +6,6 @@ import Layout from './Layout';
 import PartList from './PartList';
 import PartDetail from './PartDetails';
 import BooksDetail from './BooksDetail';
-import BookPage from './BookPage';
 
 const Transition = styled(TransitionGroup)`
   position: relative;
@@ -64,11 +62,6 @@ function Routes() {
             <Route path={'/books'} exact>
               <Page>
                 <BooksDetail />
-              </Page>
-            </Route>
-            <Route path={'/books/:bookId'} exact>
-              <Page>
-                <BookPage />
               </Page>
             </Route>
           </Switch>

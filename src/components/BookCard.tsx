@@ -2,8 +2,9 @@ import * as React from 'react';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import styled from '@emotion/styled';
 import api from '../api';
-import { Star, Heart, Annotation } from '../assets';
+import { Star, Heart } from '../assets';
 import BookInfoModal from './BookInfoModal';
+import ReviewButton from './ReviewButton';
 import LoginModal from './LoginModal';
 import type KeenSlider from 'keen-slider';
 
@@ -130,38 +131,6 @@ const WishButton = styled.button`
   }
 `;
 
-const ReviewButton = styled.button`
-  width: 100%;
-  height: 2rem;
-  display: inline-flex;
-  align-items: center;
-  border-radius: 10px;
-  padding: 4px;
-  background-color: rgba(255, 255, 255, 0.4);
-  box-shadow: 0 4px 8px 0 rgba(31, 38, 135, 0.37);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  color: var(--primary-dark);
-  transition: transform 250ms, background-color 250ms;
-  font-size: 0.875rem;
-  font-weight: 700;
-  font-family: 'iA Writer Quattro';
-  line-height: 1.5rem;
-
-  span {
-    margin-left: 0.5rem;
-  }
-
-  &:hover {
-    transform: scale(0.98) perspective(1px);
-    background-color: rgba(255, 255, 255, 0.56);
-  }
-
-  &:active {
-    transform: scale(0.98) perspective(1px);
-    background-color: rgba(255, 255, 255, 0.56);
-  }
-`;
-
 interface BookProps {
   bookId: number;
   title: string;
@@ -266,10 +235,7 @@ function BookCard({ bookId, title, description, imageUrl, averageRating, slider 
           </WishButton>
         </InfoBox>
         <div>
-          <ReviewButton>
-            <Annotation />
-            <span>리뷰 보러가기</span>
-          </ReviewButton>
+          <ReviewButton bookId={bookId} />
         </div>
       </Summary>
       <BookInfoModal open={openInfo} onClose={toggleInfo} info={info} />
