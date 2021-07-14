@@ -31,6 +31,7 @@ function Layout({ children }: LayoutProps) {
             display: flex;
             align-items: center;
             justify-content: center;
+            z-index: 1;
           }
 
           #root {
@@ -41,6 +42,8 @@ function Layout({ children }: LayoutProps) {
             margin: 8px;
             width: calc(100% - 1rem);
             height: calc(100% - 1rem);
+            position: relative;
+            z-index: 2;
 
             @media (min-width: 360px) and (min-height: 720px) {
               margin: 0;

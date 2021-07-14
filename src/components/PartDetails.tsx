@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import api from '../api';
-import PartTitle from './PartTitle';
+import ContentTitle from './ContentTitle';
 import CategoryList from './CategoryList';
 
 interface RouteParams {
@@ -31,7 +31,7 @@ function PartDetail() {
 
   return (
     <>
-      <PartTitle stepText={stepText} />
+      <ContentTitle stepText={stepText} />
       <CategoryList partId={partIdNum} />
     </>
   );

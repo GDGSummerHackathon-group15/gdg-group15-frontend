@@ -1,11 +1,9 @@
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import WebFont from 'webfontloader';
 import { Routes } from './components';
-// import GithubLoginCallback from './components/GithubLoginCallback';
-
-import AuthProvider from './context';
+import GithubLoginCallback from './components/GithubLoginCallback';
 
 const queryClient = new QueryClient();
 
@@ -23,14 +21,15 @@ WebFont.load({
 
 function App() {
   return (
-    <AuthProvider>
-      <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <Routes />
-        </BrowserRouter>
-        <ReactQueryDevtools />
-      </QueryClientProvider>
-    </AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Routes />
+        <Route path={'/oauth/github'} exact>
+          <GithubLoginCallback />
+        </Route>
+      </BrowserRouter>
+      <ReactQueryDevtools />
+    </QueryClientProvider>
   );
 }
 

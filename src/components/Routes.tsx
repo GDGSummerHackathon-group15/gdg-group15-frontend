@@ -6,6 +6,7 @@ import styled from '@emotion/styled';
 import Layout from './Layout';
 import PartList from './PartList';
 import PartDetail from './PartDetails';
+import BooksDetail from './BooksDetail';
 import BookPage from './BookPage';
 
 const Transition = styled(TransitionGroup)`
@@ -14,21 +15,25 @@ const Transition = styled(TransitionGroup)`
   height: calc(100% - 2.5rem);
 
   .slide-in-enter {
+    opacity: 0;
     transform: translateX(100%);
   }
 
   .slide-in-enter-active {
+    opacity: 1;
     transform: translateX(0%);
-    transition: transform 500ms;
+    transition: transform 500ms, opacity 500ms;
   }
 
   .slide-in-exit {
+    opacity: 1;
     transform: translateX(0%);
   }
 
   .slide-in-exit-active {
+    opacity: 0;
     transform: translateX(-100%);
-    transition: transform 500ms;
+    transition: transform 500ms, opacity 500ms;
   }
 `;
 
@@ -40,10 +45,6 @@ const Page = styled.div`
 
 function Routes() {
   const location = useLocation();
-
-  React.useEffect(() => {
-    console.log(location.state);
-  }, [location.state]);
 
   return (
     <Layout>
@@ -58,6 +59,11 @@ function Routes() {
             <Route path={'/parts/:partId'} exact>
               <Page>
                 <PartDetail />
+              </Page>
+            </Route>
+            <Route path={'/books'} exact>
+              <Page>
+                <BooksDetail />
               </Page>
             </Route>
             <Route path={'/books/:bookId'} exact>

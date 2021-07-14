@@ -1,4 +1,13 @@
+export { default as Annotation } from './Annotation';
 export { default as Book } from './Book';
+export { default as ChevronDown } from './ChevronDown';
 export { default as ChevronLeft } from './ChevronLeft';
+export { default as ChevronRight } from './ChevronRight';
+export { default as ChevronUp } from './ChevronUp';
+export { default as Close } from './Close';
+export { default as Github } from './Github';
+export { default as Heart } from './Heart';
 export { default as LogoType1 } from './LogoType1';
 export { default as LogoType2 } from './LogoType2';
+export { default as Star } from './Star';
+export { default as User } from './User';

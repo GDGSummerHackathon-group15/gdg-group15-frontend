@@ -17,7 +17,7 @@ const PrevButton = styled.button`
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  padding: 0.25rem;
+  padding: 4px;
   background-color: rgba(255, 255, 255, 0.36);
   box-shadow: 0 4px 12px 0 rgba(31, 38, 135, 0.37);
   border: 1px solid rgba(255, 255, 255, 0.18);
@@ -59,7 +59,7 @@ export interface PartTitleProps {
   stepText?: string;
 }
 
-function PartTitle({ stepText }: PartTitleProps) {
+function ContentTitle({ stepText }: PartTitleProps) {
   const history = useHistory();
 
   const handleClickPrev = () => {
@@ -76,4 +76,4 @@ function PartTitle({ stepText }: PartTitleProps) {
   );
 }
 
-export default PartTitle;
+export default ContentTitle;

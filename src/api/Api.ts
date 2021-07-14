@@ -78,9 +78,9 @@ type BookReturn = {
   }[];
 };
 
-export type UserReturn = {
+type UserReturn = {
   userId: number;
-  avatarUrl: string;
+  avatarUrl: string | null | undefined;
   userName: string;
   wishes: {
     bookId: number;
@@ -122,6 +122,7 @@ type WishReturn = {
 
 class AjaxController {
   private instance: AxiosInstance;
+  private userId: number | undefined = undefined;
 
   private allowItems: AllowItem = {
     parts: ['get'],
@@ -133,6 +134,8 @@ class AjaxController {
     githubLogin: ['post'],
     wish: ['post', 'delete'],
   };
+
+  isLoggedIn: boolean = false;
 
   constructor() {
     this.instance = axios.create({
@@ -161,8 +164,10 @@ class AjaxController {
     return resp.data;
   }
 
-  async user(method: 'get', payload: number): Promise<UserReturn> {
-    const resp = await this.instance[method]<UserReturn>(`/api/user/${payload}`);
+  async user(method: 'get'): Promise<UserReturn | undefined> {
+    if (this.userId === undefined) return undefined;
+
+    const resp = await this.instance[method]<UserReturn>(`/api/user/${this.userId}`);
     return resp.data;
   }
 
@@ -197,6 +202,8 @@ class AjaxController {
   async githubLogin(method: 'post', payload: string): Promise<GithubLoginReturn> {
     const resp = await this.instance[method]<GithubLoginReturn>(`/api/login?code=${payload}`);
     this.instance.defaults.headers.Authorization = `Bearer ${resp.data.jwt}`;
+    this.userId = resp.data.userId;
+    this.isLoggedIn = true;
     return resp.data;
   }
 
