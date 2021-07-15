@@ -95,9 +95,18 @@ interface LocationState {
 export interface ReviewWriteProps {
   bookId: number;
   onClose: () => void;
+  initialContent?: string;
+  isEdit: boolean;
+  reviewId?: number;
 }
 
-function ReviewWrite({ bookId, onClose }: ReviewWriteProps) {
+function ReviewWrite({
+  bookId,
+  onClose,
+  initialContent,
+  isEdit,
+  reviewId,
+}: ReviewWriteProps) {
   const ref = React.useRef<HTMLDivElement | null>(null);
   const { value } = useSlider(ref);
 
@@ -126,6 +135,26 @@ function ReviewWrite({ bookId, onClose }: ReviewWriteProps) {
     }
   );
 
+  const reviewEdit = useMutation(
+    'review',
+    async ({ rating, content }: { rating: number; content: string }) => {
+      if (reviewId === undefined) return;
+      const resp = await api.review('put', {
+        reviewId,
+        averageRating: rating,
+        content,
+      });
+      return resp;
+    },
+    {
+      onSuccess() {
+        if (state.subCategoryId) {
+          queryClient.invalidateQueries(`subCategory/${state.subCategoryId}`);
+        }
+      },
+    }
+  );
+
   const handleClick = async () => {
     const el = textareaRef.current;
     if (el === null) return;
@@ -134,7 +163,11 @@ function ReviewWrite({ bookId, onClose }: ReviewWriteProps) {
     const content = el.value;
     const rating = Number((value * 5).toFixed(1));
 
-    await reviewSubmit.mutateAsync({ rating, content });
+    if (isEdit) {
+      await reviewEdit.mutateAsync({ rating, content });
+    } else {
+      await reviewSubmit.mutateAsync({ rating, content });
+    }
     onClose();
   };
 
@@ -143,6 +176,7 @@ function ReviewWrite({ bookId, onClose }: ReviewWriteProps) {
       <WriteBox>
         <TextArea
           placeholder={'여기에 리뷰를 입력해주세요!'}
+          defaultValue={initialContent}
           ref={textareaRef}
         />
       </WriteBox>

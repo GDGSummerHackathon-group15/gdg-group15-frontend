@@ -56,9 +56,30 @@ function ReviewButton({ bookId }: ReviewButtonProps) {
   const [openWrite, setOpenWrite] = React.useState<boolean>(false);
   const toggleWrite = () => setOpenWrite((prev) => !prev);
 
+  const [isEdit, setIsEdit] = React.useState<boolean>(false);
+  const toggleIsEdit = () => setIsEdit((prev) => !prev);
+
   const handleCloseModal = () => {
     toggleModal();
     if (openWrite) toggleWrite();
+    if (isEdit) toggleIsEdit();
+  };
+
+  const [initialContent, setInitialContent] = React.useState<
+    string | undefined
+  >(undefined);
+  const [reviewId, setReviewId] = React.useState<number | undefined>(undefined);
+  const handleGoEdit = ({
+    reviewId,
+    content,
+  }: {
+    reviewId: number;
+    content: string;
+  }) => {
+    setInitialContent(content);
+    setReviewId(reviewId);
+    toggleIsEdit();
+    toggleWrite();
   };
 
   return (
@@ -69,10 +90,16 @@ function ReviewButton({ bookId }: ReviewButtonProps) {
       </Button>
       <Modal open={open} onClose={handleCloseModal}>
         {openWrite ? (
-          <ReviewWrite bookId={bookId} onClose={handleCloseModal} />
+          <ReviewWrite
+            bookId={bookId}
+            onClose={handleCloseModal}
+            initialContent={initialContent}
+            reviewId={reviewId}
+            isEdit={isEdit}
+          />
         ) : (
           <>
-            <ReviewList bookId={bookId} />
+            <ReviewList bookId={bookId} goEdit={handleGoEdit} />
             {api.isLoggedIn && (
               <WriteButton onClick={toggleWrite}>
                 <Annotation />

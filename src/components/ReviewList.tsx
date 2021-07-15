@@ -40,6 +40,14 @@ const AuthorBox = styled.div`
 
   & > div {
     height: inherit;
+    display: flex;
+    align-items: center;
+  }
+
+  & > div:first-of-type {
+    span {
+      margin-left: 0.5rem;
+    }
   }
 
   span {
@@ -52,39 +60,85 @@ const ReviewBox = styled.div`
   margin-top: 8px;
 `;
 
+const UserBox = styled.div`
+  margin-top: 8px;
+`;
+
 export interface ReviewItemProps {
+  id?: number;
   author: string;
   authorImage?: string | null;
   rating: number;
   content: string;
+  editable?: boolean;
+  goEdit?: ({
+    reviewId,
+    content,
+  }: {
+    reviewId: number;
+    content: string;
+  }) => void;
 }
 
-function ReviewItem({ author, authorImage, rating, content }: ReviewItemProps) {
+function ReviewItem({
+  id,
+  author,
+  authorImage,
+  rating,
+  content,
+  editable,
+  goEdit,
+}: ReviewItemProps) {
+  const handleClickEdit = () => {
+    if (id && goEdit) goEdit({ reviewId: id, content });
+  };
+
   return (
     <ListItem>
       <AuthorBox>
         <div>
           <Avator src={authorImage} />
-          {author}
+          <span>{author}</span>
         </div>
         <div>
           <RatingBox rating={rating} />
         </div>
       </AuthorBox>
       <ReviewBox>{content}</ReviewBox>
+      {editable && (
+        <UserBox>
+          <button onClick={handleClickEdit}>수정</button>
+        </UserBox>
+      )}
     </ListItem>
   );
 }
 
 export interface ReviewListProps {
   bookId: number;
+  goEdit: ({
+    reviewId,
+    content,
+  }: {
+    reviewId: number;
+    content: string;
+  }) => void;
 }
 
-function ReviewList({ bookId }: ReviewListProps) {
+function ReviewList({ bookId, goEdit }: ReviewListProps) {
   const { data } = useQuery(`books/${bookId}`, async () => {
     const resp = await api.book('get', bookId);
     return resp.reviews;
   });
+
+  const { data: user } = useQuery(
+    'user',
+    async () => {
+      const resp = await api.user('get');
+      return resp;
+    },
+    { enabled: api.isLoggedIn }
+  );
 
   return (
     <List>
@@ -93,9 +147,12 @@ function ReviewList({ bookId }: ReviewListProps) {
       ) : (
         data.map((el) => (
           <ReviewItem
+            id={el.reviewId}
             author={el.userResponse.name}
             rating={el.averageRating}
             content={el.content}
+            editable={el.userResponse.userId === user?.userId}
+            goEdit={goEdit}
           />
         ))
       )}
