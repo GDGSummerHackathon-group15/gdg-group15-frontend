@@ -22,7 +22,13 @@ import {
 } from './BookPage.styles';
 
 const StarIcon = () => (
-  <svg width={36} height={36} fill={'none'} viewBox={'0 0 24 24'} stroke={'currentColor'}>
+  <svg
+    width={36}
+    height={36}
+    fill={'none'}
+    viewBox={'0 0 24 24'}
+    stroke={'currentColor'}
+  >
     <path
       strokeLinecap={'round'}
       strokeLinejoin={'round'}

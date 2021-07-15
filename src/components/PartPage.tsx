@@ -26,9 +26,13 @@ function PartPage() {
     return data;
   });
 
-  const [catetoryId, setCategoryId] = React.useState<number | undefined>(undefined);
+  const [catetoryId, setCategoryId] = React.useState<number | undefined>(
+    undefined
+  );
 
-  const [subCatetoryId, setSubCategoryId] = React.useState<number | undefined>(undefined);
+  const [subCatetoryId, setSubCategoryId] = React.useState<number | undefined>(
+    undefined
+  );
 
   return (
     <>
@@ -66,7 +70,9 @@ function PartPage() {
             </SubCategoryList>
           )}
         </ListBox>
-        {subCatetoryId !== undefined && <BookList subCategoryId={subCatetoryId} />}
+        {subCatetoryId !== undefined && (
+          <BookList subCategoryId={subCatetoryId} />
+        )}
       </ContentBox>
     </>
   );

@@ -41,10 +41,10 @@ export const Title = styled.h3`
   margin-inline: 0;
   box-sizing: border-box;
   height: 2rem;
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-family: 'iA Writer Quattro';
   line-height: 1.5rem;
-  padding: 0.25rem 0.5rem;
+  padding: 4px 8px;
   background-color: rgba(255, 255, 255, 0.36);
   box-shadow: 0 4px 12px 0 rgba(31, 38, 135, 0.37);
   border: 1px solid rgba(255, 255, 255, 0.18);

@@ -10,7 +10,12 @@ function ChevronUp(props: React.SVGProps<SVGSVGElement>) {
       stroke={'currentColor'}
       {...props}
     >
-      <path strokeLinecap={'round'} strokeLinejoin={'round'} strokeWidth={2} d={'M5 15l7-7 7 7'} />
+      <path
+        strokeLinecap={'round'}
+        strokeLinejoin={'round'}
+        strokeWidth={2}
+        d={'M5 15l7-7 7 7'}
+      />
     </svg>
   );
 }

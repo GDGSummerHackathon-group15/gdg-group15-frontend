@@ -2,8 +2,9 @@ import * as React from 'react';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import styled from '@emotion/styled';
 import api from '../api';
-import { Star, Heart } from '../assets';
+import { Heart } from '../assets';
 import BookInfoModal from './BookInfoModal';
+import RatingBox from './RatingBox';
 import ReviewButton from './ReviewButton';
 import LoginModal from './LoginModal';
 import type KeenSlider from 'keen-slider';
@@ -93,19 +94,6 @@ const InfoBox = styled.div`
   justify-content: space-between;
 `;
 
-const RatingBox = styled.div`
-  background-color: rgba(255, 255, 255, 0.4);
-  box-shadow: 0 4px 8px 0 rgba(31, 38, 135, 0.37);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 10px;
-  padding: 4px;
-  height: 2rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--primary-dark);
-`;
-
 const WishButton = styled.button`
   width: 2rem;
   height: 2rem;
@@ -131,7 +119,15 @@ const WishButton = styled.button`
   }
 `;
 
-interface BookProps {
+const BookRating = styled.div`
+  background-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 8px 0 rgba(31, 38, 135, 0.37);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 10px;
+  padding: 4px 8px;
+`;
+
+export interface BookProps {
   bookId: number;
   title: string;
   description: string;
@@ -140,7 +136,14 @@ interface BookProps {
   slider: KeenSlider;
 }
 
-function BookCard({ bookId, title, description, imageUrl, averageRating, slider }: BookProps) {
+function BookCard({
+  bookId,
+  title,
+  description,
+  imageUrl,
+  averageRating,
+  slider,
+}: BookProps) {
   const [openInfo, setOpenInfo] = React.useState<boolean>(false);
   const toggleInfo = () => setOpenInfo((prev) => !prev);
 
@@ -223,13 +226,9 @@ function BookCard({ bookId, title, description, imageUrl, averageRating, slider 
           </InfoButton>
         </div>
         <InfoBox>
-          <RatingBox>
-            <Star />
-            <Star />
-            <Star />
-            <Star />
-            <Star />
-          </RatingBox>
+          <BookRating>
+            <RatingBox rating={averageRating} />
+          </BookRating>
           <WishButton onClick={handleClickWish}>
             <Heart fill={likeThisBook ? '#f0a1bf' : 'none'} />
           </WishButton>

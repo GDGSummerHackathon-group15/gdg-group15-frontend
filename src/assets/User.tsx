@@ -2,7 +2,13 @@ import * as React from 'react';
 
 function User(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg width={20} height={20} viewBox={'0 0 20 20'} fill={'currentColor'} {...props}>
+    <svg
+      width={20}
+      height={20}
+      viewBox={'0 0 20 20'}
+      fill={'currentColor'}
+      {...props}
+    >
       <path
         fillRule={'evenodd'}
         d={

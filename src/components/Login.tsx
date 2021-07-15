@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useQuery } from 'react-query';
 import styled from '@emotion/styled';
 import api from '../api';
-import { User } from '../assets';
+import Avator from './Avator';
 import LoginModal from './LoginModal';
 
 const LoginButton = styled.button`
@@ -31,21 +31,6 @@ const LoginButton = styled.button`
     background-color: rgba(255, 255, 255, 0.4);
   }
 `;
-
-const UserImage = styled.img`
-  border-radius: 50%;
-`;
-
-interface AvatorProps {
-  src: string | null | undefined;
-}
-
-function Avator({ src }: AvatorProps) {
-  if (typeof src === 'string' && src !== '') {
-    return <UserImage src={src} width={24} height={24} />;
-  }
-  return <User width={24} height={24} />;
-}
 
 function Login() {
   const [open, setOpen] = React.useState<boolean>(false);

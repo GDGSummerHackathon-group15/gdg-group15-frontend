@@ -95,7 +95,11 @@ interface Category {
   subCategoryResponses: SubCategory[];
 }
 
-function CategoryItem({ mainCategoryId, title, subCategoryResponses }: Category) {
+function CategoryItem({
+  mainCategoryId,
+  title,
+  subCategoryResponses,
+}: Category) {
   const [open, setOpen] = React.useState<boolean>(false);
 
   const history = useHistory();
