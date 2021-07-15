@@ -150,24 +150,35 @@ class AjaxController {
   }
 
   async part(method: 'get', payload: number): Promise<PartReturn> {
-    const resp = await this.instance[method]<PartReturn>(`/api/parts/${payload}`);
+    const resp = await this.instance[method]<PartReturn>(
+      `/api/parts/${payload}`
+    );
     return resp.data;
   }
 
-  async subCategories(method: 'get', payload: number): Promise<SubCategoriesReturn> {
-    const resp = await this.instance[method]<SubCategoriesReturn>(`/api/subCategories/${payload}`);
+  async subCategories(
+    method: 'get',
+    payload: number
+  ): Promise<SubCategoriesReturn> {
+    const resp = await this.instance[method]<SubCategoriesReturn>(
+      `/api/subCategories/${payload}`
+    );
     return resp.data;
   }
 
   async book(method: 'get', payload: number): Promise<BookReturn> {
-    const resp = await this.instance[method]<BookReturn>(`/api/books/${payload}`);
+    const resp = await this.instance[method]<BookReturn>(
+      `/api/books/${payload}`
+    );
     return resp.data;
   }
 
   async user(method: 'get'): Promise<UserReturn | undefined> {
     if (this.userId === undefined) return undefined;
 
-    const resp = await this.instance[method]<UserReturn>(`/api/user/${this.userId}`);
+    const resp = await this.instance[method]<UserReturn>(
+      `/api/user/${this.userId}`
+    );
     return resp.data;
   }
 
@@ -190,17 +201,28 @@ class AjaxController {
   async review(method: 'put' | 'post', payload: any): Promise<ReviewReturn> {
     if (method === 'post') {
       const { bookId, ...rest } = payload;
-      const resp = await this.instance[method]<ReviewReturn>(`/api/books/${bookId}/reviews`, rest);
+      const resp = await this.instance[method]<ReviewReturn>(
+        `/api/books/${bookId}/reviews`,
+        rest
+      );
       return resp.data;
     }
 
     const { reviewId, ...rest } = payload;
-    const resp = await this.instance[method]<ReviewReturn>(`/api/reviews/${reviewId}`, rest);
+    const resp = await this.instance[method]<ReviewReturn>(
+      `/api/reviews/${reviewId}`,
+      rest
+    );
     return resp.data;
   }
 
-  async githubLogin(method: 'post', payload: string): Promise<GithubLoginReturn> {
-    const resp = await this.instance[method]<GithubLoginReturn>(`/api/login?code=${payload}`);
+  async githubLogin(
+    method: 'post',
+    payload: string
+  ): Promise<GithubLoginReturn> {
+    const resp = await this.instance[method]<GithubLoginReturn>(
+      `/api/login?code=${payload}`
+    );
     this.instance.defaults.headers.Authorization = `Bearer ${resp.data.jwt}`;
     this.userId = resp.data.userId;
     this.isLoggedIn = true;
@@ -209,9 +231,14 @@ class AjaxController {
 
   async wish(method: 'post', payload: number): Promise<WishReturn>;
   async wish(method: 'delete', payload: number): Promise<void>;
-  async wish(method: 'post' | 'delete', payload: number): Promise<WishReturn | void> {
+  async wish(
+    method: 'post' | 'delete',
+    payload: number
+  ): Promise<WishReturn | void> {
     if (method === 'post') {
-      const resp = await this.instance[method]<WishReturn>(`/api/books/${payload}/wishes`);
+      const resp = await this.instance[method]<WishReturn>(
+        `/api/books/${payload}/wishes`
+      );
       return resp.data;
     }
 

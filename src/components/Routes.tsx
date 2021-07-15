@@ -47,7 +47,11 @@ function Routes() {
   return (
     <Layout>
       <Transition component={'main'}>
-        <CSSTransition key={location.pathname} classNames={'slide-in'} timeout={500}>
+        <CSSTransition
+          key={location.pathname}
+          classNames={'slide-in'}
+          timeout={500}
+        >
           <Switch location={location}>
             <Route path={'/'} exact>
               <Page>

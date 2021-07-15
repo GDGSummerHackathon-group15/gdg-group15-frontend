@@ -35,7 +35,8 @@ export const ImageDetailLink = styled(Link)`
   text-decoration: none;
   padding: 0.625rem 1.5rem;
   background-color: var(--secondary-blue-grey);
-  box-shadow: -1px -1px 3px rgba(255, 255, 255, 0.8), 1px 1px 3px rgba(0, 0, 0, 0.08);
+  box-shadow: -1px -1px 3px rgba(255, 255, 255, 0.8),
+    1px 1px 3px rgba(0, 0, 0, 0.08);
   border-radius: 6px;
   transition: box-shadow 250ms;
   color: var(--primary-dark);
@@ -43,11 +44,13 @@ export const ImageDetailLink = styled(Link)`
   font-weight: 700;
 
   &:hover {
-    box-shadow: inset -1px -1px 3px rgba(255, 255, 255, 0.8), inset 1px 1px 3px rgba(0, 0, 0, 0.08);
+    box-shadow: inset -1px -1px 3px rgba(255, 255, 255, 0.8),
+      inset 1px 1px 3px rgba(0, 0, 0, 0.08);
   }
 
   &:active {
-    box-shadow: inset -1px -1px 3px rgba(255, 255, 255, 0.8), inset 1px 1px 3px rgba(0, 0, 0, 0.08);
+    box-shadow: inset -1px -1px 3px rgba(255, 255, 255, 0.8),
+      inset 1px 1px 3px rgba(0, 0, 0, 0.08);
   }
 `;
 

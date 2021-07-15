@@ -28,7 +28,9 @@ const Slider = ({ items }: SliderProps) => {
     if (slider) slider.resize();
   }, [items, slider]);
 
-  const [isHoverBookId, setIsHoverBookId] = React.useState<number | undefined>(undefined);
+  const [isHoverBookId, setIsHoverBookId] = React.useState<number | undefined>(
+    undefined
+  );
 
   return (
     <SliderBox className={'keen-slider'} ref={sliderRef}>
@@ -40,7 +42,9 @@ const Slider = ({ items }: SliderProps) => {
           >
             {isHoverBookId === el.bookId && (
               <ImageDetail>
-                <ImageDetailLink to={`/books/${el.bookId}`}>상세보기</ImageDetailLink>
+                <ImageDetailLink to={`/books/${el.bookId}`}>
+                  상세보기
+                </ImageDetailLink>
               </ImageDetail>
             )}
             <img src={el.imageUrl} alt={`${el.title} 책 표지`} width={360} />
@@ -56,10 +60,13 @@ export interface BookListProps {
 }
 
 function BookList({ subCategoryId }: BookListProps) {
-  const { data: books } = useQuery(`subCategories/${subCategoryId}`, async () => {
-    const data = await api.subCategories('get', subCategoryId);
-    return data;
-  });
+  const { data: books } = useQuery(
+    `subCategories/${subCategoryId}`,
+    async () => {
+      const data = await api.subCategories('get', subCategoryId);
+      return data;
+    }
+  );
 
   if (books === undefined) return null;
   return <Slider items={books} />;
